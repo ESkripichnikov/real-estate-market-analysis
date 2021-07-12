@@ -14,6 +14,7 @@ dist/
 downloads/
 eggs/
 .idea/
+.DS_Store
 .eggs/
 lib/
 lib64/
