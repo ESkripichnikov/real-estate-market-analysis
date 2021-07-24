@@ -1,0 +1,10 @@
+model_type,feature_type,optimal_params,LMSE,LRMSE
+Ridge,standard_features,{'alpha': 1.0},0.184,0.429
+Ridge,house_build_date_included,{'alpha': 1.0},0.179,0.423
+Ridge,floor_number_included,{'alpha': 1.0},0.179,0.423
+KNN,standard_features,{'n_neighbors': 3},0.099,0.314
+KNN,house_build_date_included,{'n_neighbors': 3},0.106,0.326
+KNN,floor_number_included,{'n_neighbors': 5},0.147,0.383
+SVR,standard_features,"{'C': 1, 'epsilon': 0.1, 'kernel': 'rbf'}",0.092,0.304
+SVR,house_build_date_included,"{'C': 10, 'epsilon': 0.1, 'kernel': 'rbf'}",0.086,0.294
+SVR,floor_number_included,"{'C': 10, 'epsilon': 0.1, 'kernel': 'rbf'}",0.082,0.286
