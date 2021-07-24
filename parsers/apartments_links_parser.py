@@ -6,12 +6,13 @@ from tqdm import tqdm
 from constants import secondary, primary, number_to_parse, cian_url, Category, Rooms
 import time
 
-ratio = number_to_parse / sum(primary + secondary)
-primary_count = [int(i * ratio) for i in primary]  # how many flats of each apartment type to parse
-secondary_count = [int(i * ratio) for i in secondary]  # how many flats of each apartment type to parse
 
-primary_pages = [int(i / 28 + 1) for i in primary_count]  # how many pages of each apartment type to parse
-secondary_pages = [int(i / 28 + 1) for i in secondary_count]  # how many pages of each apartment type to parse
+ratio = number_to_parse / sum(primary + secondary)
+primary_count = [int(i * ratio) for i in primary]  # how many apartments of each housing type to parse
+secondary_count = [int(i * ratio) for i in secondary]  # how many apartments of each housing type to parse
+
+primary_pages = [int(i / 28 + 1) for i in primary_count]  # how many pages of each housing type to parse
+secondary_pages = [int(i / 28 + 1) for i in secondary_count]  # how many pages of each housing type to parse
 
 primary_pages = dict(zip(Rooms, primary_pages))
 secondary_pages = dict(zip(Rooms, secondary_pages))
@@ -22,14 +23,14 @@ def get_url(category, rooms):
 
 
 def get_page_soup(url_link):
-    response = requests.get(url_link, headers={'User-Agent': UserAgent().chrome})
+    response = requests.get(url_link, headers={'User-Agent': UserAgent().random}, allow_redirects=True, timeout=7)
     if not response.ok:
         return None
     html = response.content
     return BeautifulSoup(html, 'html.parser')
 
 
-def get_apartments_links(page_soup) -> list[str]:
+def get_apartments_links(page_soup):
     try:
         apartments_links = page_soup.findAll('a', {"class": "_93444fe79c--link--39cNw"})
         apartments_links = [link.attrs["href"] for link in apartments_links]
