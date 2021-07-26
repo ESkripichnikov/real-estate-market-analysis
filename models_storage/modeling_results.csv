@@ -1,10 +1,10 @@
-model_type,feature_type,optimal_params,LMSE,LRMSE
-Ridge,standard_features,{'alpha': 1.0},0.184,0.429
-Ridge,house_build_date_included,{'alpha': 1.0},0.179,0.423
-Ridge,floor_number_included,{'alpha': 1.0},0.179,0.423
-KNN,standard_features,{'n_neighbors': 3},0.099,0.314
-KNN,house_build_date_included,{'n_neighbors': 3},0.106,0.326
-KNN,floor_number_included,{'n_neighbors': 5},0.147,0.383
-SVR,standard_features,"{'C': 1, 'epsilon': 0.1, 'kernel': 'rbf'}",0.092,0.304
-SVR,house_build_date_included,"{'C': 10, 'epsilon': 0.1, 'kernel': 'rbf'}",0.086,0.294
-SVR,floor_number_included,"{'C': 10, 'epsilon': 0.1, 'kernel': 'rbf'}",0.082,0.286
+model_type,feature_type,optimal_params,LMSE,LRMSE,R-Squared
+Ridge,standard_features,{'alpha': 1.0},0.184053,0.429014,0.83138
+Ridge,house_build_date_included,{'alpha': 1.0},0.178878,0.42294,0.836121
+Ridge,floor_number_included,{'alpha': 1.0},0.178739,0.422776,0.836248
+KNN,standard_features,{'n_neighbors': 3},0.098854,0.31441,0.909435
+KNN,house_build_date_included,{'n_neighbors': 3},0.106193,0.325873,0.902711
+KNN,floor_number_included,{'n_neighbors': 5},0.146651,0.382951,0.865645
+SVR,standard_features,"{'C': 1, 'epsilon': 0.1, 'kernel': 'rbf'}",0.092428,0.30402,0.915322
+SVR,house_build_date_included,"{'C': 10, 'epsilon': 0.1, 'kernel': 'rbf'}",0.086377,0.293899,0.920866
+SVR,floor_number_included,"{'C': 10, 'epsilon': 0.1, 'kernel': 'rbf'}",0.081788,0.285986,0.92507

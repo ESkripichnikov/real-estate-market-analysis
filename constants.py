@@ -80,4 +80,4 @@ model_params = {
 }
 
 modeling_results_fields = ['model_type', 'feature_type', 'optimal_params',
-                           'LMSE', 'LRMSE']
+                           'LMSE', 'LRMSE', 'R-Squared']

@@ -14,9 +14,9 @@ def get_model_with_metrics(X, y, numerical_columns, categorical_columns, model, 
 
     grid_searcher = train_model(X_train, y_train, model, model_params)
 
-    MSE, RMSE = evaluate_metrics(grid_searcher.best_estimator_, X_test, y_test)
+    MSE, RMSE, R2 = evaluate_metrics(grid_searcher.best_estimator_, X_test, y_test)
 
-    return grid_searcher.best_estimator_, grid_searcher.best_params_, MSE, RMSE
+    return grid_searcher.best_estimator_, grid_searcher.best_params_, MSE, RMSE, R2
 
 
 def transform_and_split(X, y, numerical_columns, categorical_columns, test_size=0.2):
@@ -52,4 +52,6 @@ def train_model(X_train, y_train, model, model_params):
 def evaluate_metrics(estimator, X_test, y_test):
     MSE = mean_squared_error(y_test, estimator.predict(X_test))
     RMSE = np.sqrt(MSE)
-    return round(MSE, 3), round(RMSE, 3)
+    MSE_baseline = mean_squared_error(y_test, np.full(y_test.shape, y_test.mean()))
+    R2 = 1 - MSE / MSE_baseline
+    return round(MSE, 6), round(RMSE, 6), round(R2, 6)

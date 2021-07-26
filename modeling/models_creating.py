@@ -16,15 +16,16 @@ df = pd.read_csv('../preprocessed_dataframes/apartments.csv', index_col='id')
 
 with open('../models_storage/modeling_results.csv', 'a+', newline='') as results_file:
     writer = csv.DictWriter(results_file, fieldnames=modeling_results_fields)
-    # writer.writeheader()
+    writer.writeheader()
 
     for model in tqdm(models):
         for feature_type, create_features_func in features_sets.items():
             X, y = create_features_func(df)
 
-            best_estimator, best_params, LMSE, LRMSE = get_model_with_metrics(X, y, numerical_columns[feature_type],
-                                                                              categorical_columns[feature_type], model,
-                                                                              model_params[model])
+            best_estimator, best_params, LMSE, LRMSE, R2 = get_model_with_metrics(X, y,
+                                                                                  numerical_columns[feature_type],
+                                                                                  categorical_columns[feature_type],
+                                                                                  model, model_params[model])
 
             model_name = str(model) + '_' + str(feature_type)
             dump(best_estimator, f'../models_storage/{model_name}.joblib')
@@ -34,7 +35,8 @@ with open('../models_storage/modeling_results.csv', 'a+', newline='') as results
                 'feature_type': feature_type,
                 'optimal_params': best_params,
                 'LMSE': LMSE,
-                'LRMSE': LRMSE
+                'LRMSE': LRMSE,
+                'R-Squared': R2
             }
 
             writer.writerow(modeling_results)
