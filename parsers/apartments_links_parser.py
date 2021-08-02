@@ -31,15 +31,10 @@ def get_page_soup(url_link):
 
 
 def get_apartments_links(page_soup):
-    try:
-        apartments_links = page_soup.findAll('a', {"class": "_93444fe79c--link--39cNw"})
-        apartments_links = [link.attrs["href"] for link in apartments_links]
-        if not apartments_links:
-            print("get no links!")
-    except Exception:
+    apartments_links = page_soup.findAll('a', {"class": "_93444fe79c--link--39cNw"})
+    apartments_links = [link.attrs["href"] for link in apartments_links]
+    if not apartments_links:
         print("get no links!")
-        apartments_links = []
-
     return apartments_links
 
 
