@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Build and Push Image to Dockerhub
 
 on:
   push:
@@ -15,7 +15,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Build, tag, and push image to Amazon ECR
+    - name: Build, tag, and push image to Dockerhub
       id: build-image
       env:
         ECR_REGISTRY: skrij
