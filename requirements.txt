@@ -1,0 +1,11 @@
+pandas
+sklearn
+tqdm
+joblib
+requests
+bs4
+fake_useragent
+selenium
+pytest
+pytest-cov
+coverage
