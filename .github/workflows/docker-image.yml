@@ -7,27 +7,26 @@ on:
     branches: [ master ]
 
 jobs:
-
   build:
-
+    name: build
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout
-    - uses: actions/checkout@v2
+      uses: actions/checkout@v2
 
     - name: Build, tag, and push image to Amazon ECR
       id: build-image
       env:
-          ECR_REGISTRY: skrij
-          ECR_REPOSITORY: real-estate-market-analysis
-          IMAGE_TAG: ${{ github.sha }}
-          DOCKER_PASS: ${{ secrets.docker_pass }}
+        ECR_REGISTRY: skrij
+        ECR_REPOSITORY: real-estate-market-analysis
+        IMAGE_TAG: ${{ github.sha }}
+        DOCKER_PASS: ${{ secrets.docker_pass }}
       run: |
-          # Build a docker container and
-          # push it to ECR so that it can
-          # be deployed to ECS.
-          docker login -u skrij -p $DOCKER_PASS
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-          echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+        # Build a docker container and
+        # push it to ECR so that it can
+        # be deployed to ECS.
+        docker login -u skrij -p $DOCKER_PASS
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
