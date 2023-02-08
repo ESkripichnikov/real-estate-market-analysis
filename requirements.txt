@@ -4,7 +4,7 @@ tqdm
 joblib
 requests
 bs4
-fake_useragent
+fake-useragent
 selenium
 pytest
 pytest-cov
