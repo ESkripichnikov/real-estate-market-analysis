@@ -1,85 +1,85 @@
 # Real Estate Market Analysis #
 
-## Описание проекта ##
+## Project Description ##
 
-Данный проект представляет собой анализ рынка жилой недвижимости в Москве и состоит из следующих частей:
+This project is a analysis of the residential real estate market in Moscow and consists of the following parts:
 
-1. **Парсинг данных с сайта [ЦИАН](https://www.cian.ru)**
-  
-    На данном этапе была получена информация по 10000 объявлений по продаже жилья. С целью получения репрезентативной выборки, структура полученных данных (соотношение первичного и вторичного жилья, соотношение 1, 2, 3 комнатных квартир и т. д.) определена в соответствии со структурой всего рынка жилой недвижимости Москвы.
-  
-2. **Предобработка полученных данных**
+1. **Data Scraping from [CIAN](https://www.cian.ru) website**
+   
+   At this stage, information on 10,000 real estate sale listings was obtained. In order to obtain a representative sample, the structure of the obtained data (proportion of primary and secondary housing, proportion of 1, 2, 3-room apartments, etc.) was determined according to the structure of the entire residential real estate market in Moscow.
 
-    Обработка пропущенных значений, преобразование исходных данных в удобный для дальнейшего анализа вид, первичный отбор признаков для будущих моделей.
-  
-3. **Разведочный анализ данных**
+2. **Data Preprocessing**
 
-    Визуализация полученных данных, расчет различных статистик и их анализ, построение дополнительных признаков.
-  
-4. **Построение моделей предсказания цены на квартиру**
+   Handling missing values, transforming the raw data into a convenient format for further analysis, preliminary feature selection for future models.
 
-    Включает в себя построение Ridge regression, KNeighborsRegressor и Support Vector Regression. Подбор оптимальных гиперпараметров для каждой из моделей и выбор лучшей из представленных моделей. Также проводится анализ коэффициентов полученной Ridge regression модели, с целью выявления наиболее позитивно и негативно влияющих на цену квартиры признаков.
+3. **Exploratory Data Analysis**
 
-## Результаты исследования ## 
+   Visualization of the obtained data, calculation of various statistics and their analysis, creation of additional features.
 
-В качестве основных признаков для построения моделей предсказания цены были отобраны следующие характеристики:
-- 12 административных округов города Москвы
-- Тип жилья (Новостройка или вторичное жилье)
-- Тип дома (Панельный, монолитный, кирпичный, монолитно-кирпичный и другой)
-- Общая площадь квартиры в квадратных метрах
-- Категориальная переменная, содержащая в себе информацию о ближайшем метро: способ достижения ближайшего метро (пешком или на транспорте) и время до ближайшего метро в минутах (временные интервалы 0-5, 5-10, 10-15, 15+).
+4. **Building Apartment Price Prediction Models**
 
-Помимо основных признаков, для построения дополнительных моделей использовались дата постройки дома и номер этажа квартиры
+   This includes building Ridge regression, KNeighborsRegressor, and Support Vector Regression models. Tuning the hyperparameters for each model and selecting the best model among the presented ones. Also, analyzing the coefficients of the resulting Ridge regression model to identify the features that have the most positive and negative impact on the apartment price.
 
-*В следующей таблице приведены результаты моделирования:*
+## Research Results ##
 
-| Model:       	| Ridge             	|                   	|                	| KNN                	|                    	|                    	| SVR                                       	|                                            	|                                            	|
-|--------------	|-------------------	|-------------------	|----------------	|--------------------	|--------------------	|--------------------	|-------------------------------------------	|--------------------------------------------	|--------------------------------------------	|
-| Features:    	| standart features 	| + house buld date 	| + floor number 	| standart features  	| + house buld date  	| + floor number     	| standart features                         	| + house buld date                          	| + floor number                             	|
-| Optim params 	| {'alpha': 1.0}    	| {'alpha': 1.0}    	| {'alpha': 1.0} 	| {'n_neighbors': 3} 	| {'n_neighbors': 3} 	| {'n_neighbors': 5} 	| {'C': 1, 'epsilon': 0.1, 'kernel': 'rbf'} 	| {'C': 10, 'epsilon': 0.1, 'kernel': 'rbf'} 	| {'C': 10, 'epsilon': 0.1, 'kernel': 'rbf'} 	|
-| LMSE         	| 0.184053          	| 0.178878          	| 0.178739       	| 0.098854           	| 0.106193           	| 0.146651           	| 0.092428                                  	| 0.086377                                   	| 0.081788                                   	|
-| LRMSE        	| 0.429014          	| 0.422940          	| 0.422776       	| 0.314410           	| 0.325873           	| 0.382951           	| 0.304020                                  	| 0.293899                                   	| 0.285986                                   	|
-| R-Squared    	| 0.831380          	| 0.836121          	| 0.836248       	| 0.909435           	| 0.902711           	| 0.865645           	| 0.915322                                  	| 0.920866                                   	| 0.925070                                   	|
+The main features selected for building apartment price prediction models are as follows:
+- 12 administrative districts of Moscow
+- Type of housing (newly built or secondary)
+- Type of building (panel, monolithic, brick, monolithic-brick, and others)
+- Total area of the apartment in square meters
+- Categorical variable containing information about the nearest metro: mode of reaching the nearest metro (by walking or by transportation) and time to the nearest metro in minutes (time intervals 0-5, 5-10, 10-15, 15+).
 
-**Таким образом, лучшей моделью оказалась Support Vector Regression с R-squared 0.925**
+In addition to the main features, the construction date of the building and the floor number of the apartment were used for building additional models.
+
+*The following table shows the modeling results:*
+
+| Model:        | Ridge              |                    |                 | KNN                 |                     |                     | SVR                                        |                                             |                                             |
+|--------------|-------------------|-------------------|----------------|--------------------|--------------------|--------------------|-------------------------------------------|--------------------------------------------|--------------------------------------------|
+| Features:     | standart features  | + house buld date  | + floor number  | standart features   | + house buld date   | + floor number      | standart features                          | + house buld date                           | + floor number                              |
+| Optim params  | {'alpha': 1.0}     | {'alpha': 1.0}     | {'alpha': 1.0}  | {'n_neighbors': 3}  | {'n_neighbors': 3}  | {'n_neighbors': 5}  | {'C': 1, 'epsilon': 0.1, 'kernel': 'rbf'}  | {'C': 10, 'epsilon': 0.1, 'kernel': 'rbf'}  | {'C': 10, 'epsilon': 0.1, 'kernel': 'rbf'}  |
+| LMSE          | 0.184053           | 0.178878           | 0.178739        | 0.098854            | 0.106193            | 0.146651            | 0.092428                                   | 0.086377                                    | 0.081788                                    |
+| LRMSE         | 0.429014           | 0.422940           | 0.422776        | 0.314410            | 0.325873            | 0.382951            | 0.304020                                   | 0.293899                                    | 0.285986                                    |
+| R-Squared     | 0.831380           | 0.836121           | 0.836248        | 0.909435            | 0.902711            | 0.865645            | 0.915322                                   | 0.920866                                    | 0.925070                                    |
+
+**Thus, the best model is Support Vector Regression with an R-squared of 0.925**
 
 
-*На следующем графике можно увидеть значения коэффициентов Ridge Regression:*
+*The following graph shows the coefficients of the Ridge Regression model:*
 
 ![ridge_coeff](ridge_coeff.png)
- 
-**На основе данного графика можно выделить следующие признаки, влияющие на цену сильнее всего:**
-- Общая площадь квартиры (+)
-- Расположение квартиры в пределах ЦАО (+)
-- Монолитно-кирпичный тип дома (+)
-- Расположение квартиры в 5-15 минутах ходьбы от ближайшего метро (+)
-- Расположение квартиры в пределах НАО или ЮВАО (-)
-- Расположение квартиры в более чем 15 минутах езды на транспорте от ближайшего метро (-)
 
-** более подробно с результатами исследования можно ознакомиться в файле apartments_data_analysis.ipynb
-  
-## Структура проекта ##
+**Based on this graph, the following features have the strongest impact on the price:**
+- Total area of the apartment (+)
+- Location of the apartment within the Central Administrative District (+)
+- Monolithic-brick type of building (+)
+- Location of the apartment within a 5-15 minutes walking distance from the nearest metro (+)
+- Location of the apartment within the Northwestern Administrative District or the Southeastern Administrative District (-)
+- Location of the apartment more than 15 minutes away by transportation from the nearest metro (-)
 
-*Данный проект разбит на следующие модули:*
+**For more detailed results and analysis, please refer to the apartments_data_analysis.ipynb file.**
+
+## Project Structure ##
+
+*This project is structured into the following modules:*
 - **parsers**
-  - apartments_links_parser.py - основные функции по сбору ссылок на квартиры
-  - apartments_info_parser.py - основные функции по парсингу объявлений квартир
-  - data_collection.py - вызывается сбор ссылок на квартиры с их последующим парсингом
+  - apartments_links_parser.py - main functions for collecting apartment links
+  - apartments_info_parser.py - main functions for parsing apartment listings
+  - data_collection.py - performs apartment link collection and parsing
 - **apartments_data**
-  - apartments_links.csv - содержит полученные ссылки на квартиры
-  - apartments_database.csv - содержит всю собранную информацию по квартирам
+  - apartments_links.csv - contains the collected apartment links
+  - apartments_database.csv - contains all the gathered information about the apartments
 - **data_preprocessing**
-  - preprocessing.py - основные функции по предобработке данных, полученных после парсинга
-  - get_preprocessed_dataframes.py - формирование готовых к разведочному анализу данных датафреймов
+  - preprocessing.py - main functions for preprocessing the parsed data
+  - get_preprocessed_dataframes.py - generates preprocessed dataframes ready for exploratory analysis
 - **preprocessed_dataframes**
-  - apartments.csv - содержит предобработанные данные по всем квартирам
-  - secondary_apartments.csv - содержит предобработанные данные только по вторичному жилью
+  - apartments.csv - contains preprocessed data for all apartments
+  - secondary_apartments.csv - contains preprocessed data only for secondary housing
 - **modeling**
-  - feature_extraction.py - функции по извлечению признаков
-  - modeling_steps_functions.py - функции, описывающие этапы построения моделей
-  - models_creating.py - построение моделей, запись их результатов и их сохранение
-- **models_storage** - содержит результаты построения моделей modeling_results.csv, а также все построенные модели в формате .joblib
+  - feature_extraction.py - functions for feature extraction
+  - modeling_steps_functions.py - functions describing the steps of model building
+  - models_creating.py - builds the models, records their results, and saves them
+- **models_storage** - contains the modeling results in modeling_results.csv, as well as all the built models in .joblib format
 - **tests**
-  - parser_test.py - unit-тесты, тестирующие парсер данных
-  - test_constants.py - содержит необохдимые для тестирования константы
-- **apartments_data_analysis.ipynb** - разведочный анализ данных со всей необходимой визуализацией
+  - parser_test.py - unit tests for data parsers
+  - test_constants.py - contains constants used for testing
+- **apartments_data_analysis.ipynb** - exploratory data analysis with necessary visualizations
